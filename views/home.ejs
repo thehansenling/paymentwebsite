@@ -1,0 +1,66 @@
+<!-- views/home.ejs -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Dynamic Page</title>
+</head>
+<script src="https://js.braintreegateway.com/web/3.111.0/js/client.min.js"></script>
+<script src="https://js.braintreegateway.com/web/dropin/1.43.0/js/dropin.min.js"></script>
+<script src="https://js.braintreegateway.com/web/3.111.0/js/venmo.min.js"></script>
+<script src="https://js.braintreegateway.com/web/3.111.0/js/data-collector.min.js"></script>
+
+<button id="venmo-button">
+</button>
+<script>
+// Create a client.
+var venmoButton = document.getElementById('venmo-button');
+  braintree.client.create({
+    authorization: 'eyJ2ZXJzaW9uIjoyLCJhdXRob3JpemF0aW9uRmluZ2VycHJpbnQiOiJleUowZVhBaU9pSktWMVFpTENKaGJHY2lPaUpGVXpJMU5pSXNJbXRwWkNJNklqSXdNVGd3TkRJMk1UWXRjMkZ1WkdKdmVDSXNJbWx6Y3lJNkltaDBkSEJ6T2k4dllYQnBMbk5oYm1SaWIzZ3VZbkpoYVc1MGNtVmxaMkYwWlhkaGVTNWpiMjBpZlEuZXlKbGVIQWlPakUzTXpBME9EZzJNakFzSW1wMGFTSTZJalJrTnpFNE9HRmlMV0pqTWpjdE5HSmpaQzFoWW1OaUxURTFaV0kwTnpCbVpqUmtNeUlzSW5OMVlpSTZJbmhyTWpZMmF6a3phalpuZHpkM2N6VWlMQ0pwYzNNaU9pSm9kSFJ3Y3pvdkwyRndhUzV6WVc1a1ltOTRMbUp5WVdsdWRISmxaV2RoZEdWM1lYa3VZMjl0SWl3aWJXVnlZMmhoYm5RaU9uc2ljSFZpYkdsalgybGtJam9pZUdzeU5qWnJPVE5xTm1kM04zZHpOU0lzSW5abGNtbG1lVjlqWVhKa1gySjVYMlJsWm1GMWJIUWlPbVpoYkhObGZTd2ljbWxuYUhSeklqcGJJbTFoYm1GblpWOTJZWFZzZENKZExDSnpZMjl3WlNJNld5SkNjbUZwYm5SeVpXVTZWbUYxYkhRaVhTd2liM0IwYVc5dWN5STZleUpqZFhOMGIyMWxjbDlwWkNJNklpSjlmUS45THdxUFpUeFpWckl1QjYzUDd1QmdFRXZHckVMVGRaM0VWTlVPNWxacWd6YWJESEdvdDVjaVJiRmZMbVNteV9aRGtlYlVzNnRxMjB0RVgxZTRlSlFKZz9jdXN0b21lcl9pZD0iLCJjb25maWdVcmwiOiJodHRwczovL2FwaS5zYW5kYm94LmJyYWludHJlZWdhdGV3YXkuY29tOjQ0My9tZXJjaGFudHMveGsyNjZrOTNqNmd3N3dzNS9jbGllbnRfYXBpL3YxL2NvbmZpZ3VyYXRpb24iLCJncmFwaFFMIjp7InVybCI6Imh0dHBzOi8vcGF5bWVudHMuc2FuZGJveC5icmFpbnRyZWUtYXBpLmNvbS9ncmFwaHFsIiwiZGF0ZSI6IjIwMTgtMDUtMDgiLCJmZWF0dXJlcyI6WyJ0b2tlbml6ZV9jcmVkaXRfY2FyZHMiXX0sImhhc0N1c3RvbWVyIjp0cnVlLCJjbGllbnRBcGlVcmwiOiJodHRwczovL2FwaS5zYW5kYm94LmJyYWludHJlZWdhdGV3YXkuY29tOjQ0My9tZXJjaGFudHMveGsyNjZrOTNqNmd3N3dzNS9jbGllbnRfYXBpIiwiZW52aXJvbm1lbnQiOiJzYW5kYm94IiwibWVyY2hhbnRJZCI6InhrMjY2azkzajZndzd3czUiLCJhc3NldHNVcmwiOiJodHRwczovL2Fzc2V0cy5icmFpbnRyZWVnYXRld2F5LmNvbSIsImF1dGhVcmwiOiJodHRwczovL2F1dGgudmVubW8uc2FuZGJveC5icmFpbnRyZWVnYXRld2F5LmNvbSIsInZlbm1vIjoib2ZmIiwiY2hhbGxlbmdlcyI6W10sInRocmVlRFNlY3VyZUVuYWJsZWQiOnRydWUsImFuYWx5dGljcyI6eyJ1cmwiOiJodHRwczovL29yaWdpbi1hbmFseXRpY3Mtc2FuZC5zYW5kYm94LmJyYWludHJlZS1hcGkuY29tL3hrMjY2azkzajZndzd3czUifSwicGF5cGFsRW5hYmxlZCI6dHJ1ZSwicGF5cGFsIjp7ImJpbGxpbmdBZ3JlZW1lbnRzRW5hYmxlZCI6dHJ1ZSwiZW52aXJvbm1lbnROb05ldHdvcmsiOnRydWUsInVudmV0dGVkTWVyY2hhbnQiOmZhbHNlLCJhbGxvd0h0dHAiOnRydWUsImRpc3BsYXlOYW1lIjoiaGFuc2VuIGluYyIsImNsaWVudElkIjpudWxsLCJiYXNlVXJsIjoiaHR0cHM6Ly9hc3NldHMuYnJhaW50cmVlZ2F0ZXdheS5jb20iLCJhc3NldHNVcmwiOiJodHRwczovL2NoZWNrb3V0LnBheXBhbC5jb20iLCJkaXJlY3RCYXNlVXJsIjpudWxsLCJlbnZpcm9ubWVudCI6Im9mZmxpbmUiLCJicmFpbnRyZWVDbGllbnRJZCI6Im1hc3RlcmNsaWVudDMiLCJtZXJjaGFudEFjY291bnRJZCI6ImhhbnNlbmluYyIsImN1cnJlbmN5SXNvQ29kZSI6IlVTRCJ9fQ=='
+  }, function (clientErr, clientInstance) {
+    // Stop if there was a problem creating the client.
+    // This could happen if there is a network error or if the authorization
+    // is invalid.
+    if (clientErr) {
+      console.error('Error creating client:', clientErr);
+      return;
+    }
+
+    // Create a Venmo component.
+    braintree.venmo.create({
+      client: clientInstance,
+      container: '#dropin-container',
+      allowDesktop: true,
+      mobileWebFallBack: true,
+      allowDesktopWebLogin: true,
+      paymentMethodUsage: 'multi_use'
+    }, function (venmoErr, venmoInstance) {
+
+      // Stop if there was a problem creating Venmo.
+      // This could happen if there was a network error or if it's incorrectly
+      // configured.
+      if (venmoErr) {
+        console.error('Error creating Venmo:', venmoErr);
+        return;
+      }
+
+      venmoButton.style.display = 'block';
+
+      venmoButton.addEventListener('click', function () {
+        venmoButton.disabled = true;
+
+        venmoInstance.tokenize(function (tokenizeErr, payload) {
+          venmoButton.removeAttribute('disabled');
+
+          // ...
+        });
+
+      });
+
+      // ...
+    });
+  });
+</script>
+<body>
+  <h1>Welcome to my website, <%= username %>!</h1>
+</body>
+</html>
